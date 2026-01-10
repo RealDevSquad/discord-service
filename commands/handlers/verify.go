@@ -73,22 +73,10 @@ func (CS *CommandHandler) verify() error {
 	defer response.Body.Close()
 
 	message := "Something went wrong while generating verification link"
-	verificationSiteURL := ""
-
-	createMessage := func(format string) string {
-		return fmt.Sprintf(format, VerificationString, verificationSiteURL, token, VerificationNote)
-	}
 
 	if response.StatusCode == http.StatusCreated || response.StatusCode == http.StatusOK {
-		isDev := metaData["dev"] == "true"
-
-		verificationSiteURL = config.AppConfig.VERIFICATION_SITE_URL
-		message = createMessage("%s\n%s/discord?token=%s\n%s")
-
-		if isDev {
-			verificationSiteURL = config.AppConfig.MAIN_SITE_URL
-			message = createMessage("%s\n%s/discord?dev=true&token=%s\n%s")
-		}
+		mainSiteURL := config.AppConfig.MAIN_SITE_URL
+		message = fmt.Sprintf("%s\n%s/discord?token=%s\n%s", VerificationString, mainSiteURL, token, VerificationNote)
 	}
 
 	session, err := CreateSession()

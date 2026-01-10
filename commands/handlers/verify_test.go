@@ -203,9 +203,7 @@ func TestVerify(t *testing.T) {
 		})
 
 		handler := &CommandHandler{discordMessage: &dtos.DataPacket{
-			MetaData: map[string]string{
-				"dev": "true",
-			},
+			MetaData: map[string]string{},
 		}}
 
 		err := handler.verify()
