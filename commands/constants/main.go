@@ -25,13 +25,5 @@ var Commands = []*discordgo.ApplicationCommand{
 	{
 		Name:        utils.CommandNames.Verify,
 		Description: "Generate a link with user specific token to link with RDS backend",
-		Options: []*discordgo.ApplicationCommandOption{
-			{
-				Name:        "dev",
-				Description: "Use new website for verification.",
-				Type:        discordgo.ApplicationCommandOptionBoolean,
-				Required:    false,
-			},
-		},
 	},
 }

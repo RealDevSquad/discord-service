@@ -14,13 +14,6 @@ import (
 )
 
 func (s *CommandService) Verify(response http.ResponseWriter, request *http.Request) {
-	dev := "false"
-	if len(s.discordMessage.Data.Options) == 1 {
-		if val, ok := s.discordMessage.Data.Options[0].Value.(bool); ok && val {
-			dev = "true"
-		}
-	}
-	
 	message := &dtos.DataPacket{
 		UserID:      s.discordMessage.Member.User.ID,
 		CommandName: utils.CommandNames.Verify,
@@ -29,7 +22,6 @@ func (s *CommandService) Verify(response http.ResponseWriter, request *http.Requ
 			"userName":        s.discordMessage.Member.User.Username,
 			"discriminator":   s.discordMessage.Member.User.Discriminator,
 			"discordJoinedAt": s.discordMessage.Member.JoinedAt.Format(time.RFC3339),
-			"dev":             dev,
 			"channelId":       s.discordMessage.ChannelId,
 			"token":           s.discordMessage.Token,
 			"applicationId":   s.discordMessage.ApplicationId,

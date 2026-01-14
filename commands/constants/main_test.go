@@ -3,20 +3,16 @@ package constants
 import (
 	"testing"
 
-	"github.com/bwmarrin/discordgo"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCommandsDefinition(t *testing.T) {
-	t.Run("should have verify command with options", func(t *testing.T) {
+	t.Run("should have verify command without options", func(t *testing.T) {
 		verifyCommand := Commands[2]
 		assert.NotNil(t, verifyCommand)
-		verifyCommandOptions := verifyCommand.Options
-		assert.NotNil(t, verifyCommandOptions)
-		assert.Equal(t, "dev", verifyCommandOptions[0].Name)
-		assert.Equal(t, "Use new website for verification.", verifyCommandOptions[0].Description)
-		assert.Equal(t, discordgo.ApplicationCommandOptionBoolean, verifyCommandOptions[0].Type)
-		assert.False(t, verifyCommandOptions[0].Required)
+		assert.Equal(t, "verify", verifyCommand.Name)
+		assert.Equal(t, "Generate a link with user specific token to link with RDS backend", verifyCommand.Description)
+		assert.Nil(t, verifyCommand.Options)
 	})
 
 	t.Run("should have listening command with options", func(t *testing.T) {
